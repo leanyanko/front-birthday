@@ -3,7 +3,7 @@ import "./CreateEvent.css";
 
 class CreateEvent extends Component {
   render() {
-    return <div className="createevent">HEADER</div>;
+    return <div className="createevent">CREATE FORM</div>;
   }
 }
 
