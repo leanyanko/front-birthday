@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import "./Main.css";
 import eventService from "../services/eventService";
+import Login from "./Login"
 
 class Main extends Component {
   constructor() {
@@ -22,7 +23,9 @@ class Main extends Component {
   }
 
   render() {
-    return <div className="main">Main</div>;
+    return <div className="main">Main
+    <Login />
+    </div>;
   }
 }
 
