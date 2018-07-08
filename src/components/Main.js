@@ -4,6 +4,7 @@ import Register from './Register';
 import Login from './Login';
 import CreateEvent from './CreateEvent';
 import AllEvents from './AllEvents';
+import Typography from "@material-ui/core/Typography";
 
 class Main extends Component {
   constructor() {
@@ -89,7 +90,9 @@ class Main extends Component {
             <Register isValidUser={this.isValidUser} />
           )
         ) : (
-          ''
+          <Typography variant="headline" component="h3">
+            Welcome to Cake day! Where all of your cake day dreams come true
+          </Typography>
         )}
         {createBirthday ? <CreateEvent cancel={this.cancelCreate} /> : ''}
         {viewBirthdays ? (
