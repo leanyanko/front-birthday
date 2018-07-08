@@ -121,10 +121,9 @@ class Header extends React.Component {
               color="inherit"
               className={classes.flex}
             >
-              BIRTHDAYS
+              CAKE DAY
             </Typography>
             <Button color="inherit">Login</Button>
-            <Login />
           </Toolbar>
         </AppBar>
       </div>
