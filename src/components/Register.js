@@ -37,7 +37,6 @@ class Register extends Component {
       user: Object.assign({}, defaultNewUser),
       isValidUser: false,
     };
-    this.login = this.login.bind(this);
     this.checkHandle = this.checkHandle.bind(this);
     this.register = this.register.bind(this);
   }
@@ -55,29 +54,8 @@ class Register extends Component {
         console.log(resp);
         this.setState({
           currentUser: resp.data.data.data.user,
-          isValidUser: true,
         });
-      })
-      .catch(console.error);
-  }
-
-  login() {
-    //const { user } = this.state;
-
-    //placeholder
-    const user = {
-      user: 'mrs.leonenko@gmail.com',
-      company: 'superbest',
-      password: '12345abc',
-    };
-    //placeholder
-
-    if (!user) return;
-    rehiveService
-      .login(user)
-      .then(resp => {
-        console.log(resp.data.data);
-        this.setState({ currentUser: resp.data.data.data.user });
+        this.props.isValidUser();
       })
       .catch(console.error);
   }

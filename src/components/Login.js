@@ -39,23 +39,10 @@ class Register extends Component {
     };
     this.login = this.login.bind(this);
     this.checkHandle = this.checkHandle.bind(this);
-    this.register = this.register.bind(this);
   }
 
   checkHandle() {
     this.setState({ login: !this.state.login });
-  }
-
-  register() {
-    const user = this.state.user;
-    console.log(user);
-    rehiveService
-      .register(user)
-      .then(resp => {
-        console.log(resp);
-        this.setState({ currentUser: resp.data.data.data.user });
-      })
-      .catch(console.error);
   }
 
   login() {
@@ -74,7 +61,8 @@ class Register extends Component {
       .login(user)
       .then(resp => {
         console.log(resp.data.data);
-        //this.setState({ currentUser: resp.data.data.data.user });
+        this.setState({ currentUser: resp.data.data.data.user });
+        this.props.isValidUser();
       })
       .catch(console.error);
   }

@@ -74,7 +74,7 @@ class Main extends Component {
     } = this.props;
     return (
       <div className="main">
-        {loginChange ? <Login /> : <Register />}
+        {loginChange ? <Login isValidUser={this.isValidUser}/> : <Register isValidUser={this.isValidUser}/>}
         {createBirthday ? <CreateEvent cancel={this.cancelCreate} /> : ''}
         {viewBirthdays ? (
           <AllEvents
