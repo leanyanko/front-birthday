@@ -1,27 +1,26 @@
-import React, { Component } from "react";
-import "./CreateEvent.css";
-import eventService from "../services/eventService";
+import React, { Component } from 'react';
+import './CreateEvent.css';
+import eventService from '../services/eventService';
 
 const defaultNewEvent = {
-  title: "",
-  description: "",
-  date: "2018-07-22",
-  address: ""
+  title: '',
+  description: '',
+  ending: '22-07-2018',
 };
 
 class CreateEvent extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      event: Object.assign({}, defaultNewEvent)
+      event: Object.assign({}, defaultNewEvent),
     };
     this.postEvent = this.postEvent.bind(this);
   }
 
   postEvent() {
     const { event } = this.state;
-
-    eventService.postEvent(event);
+    console.log(event);
+    eventService.addEvent(event);
   }
 
   inputHandler(property, e) {
@@ -31,8 +30,7 @@ class CreateEvent extends Component {
   }
 
   render() {
-    console.log("rendered");
-    const { id, title, description, address, date } = this.state.event;
+    const { id, title, description, address, ending } = this.state.event;
     return (
       <div className="createevent">
         <div className="addform">
@@ -40,7 +38,7 @@ class CreateEvent extends Component {
             <input
               type="text"
               value={title}
-              onChange={this.inputHandler.bind(this, "title")}
+              onChange={this.inputHandler.bind(this, 'title')}
               className="form-control"
               aria-describedby="emailHelp"
               placeholder="Title"
@@ -50,26 +48,17 @@ class CreateEvent extends Component {
           <input
             type="text"
             value={description}
-            onChange={this.inputHandler.bind(this, "description")}
+            onChange={this.inputHandler.bind(this, 'description')}
             className="form-control"
             aria-describedby="emailHelp"
             placeholder="Description"
           />
 
-          <input
-            type="text"
-            value={address}
-            onChange={this.inputHandler.bind(this, "address")}
-            className="form-control"
-            aria-describedby="emailHelp"
-            placeholder="Address"
-          />
-
           <div className="form-group">
             <input
-              value={date}
+              value={ending}
               type="date"
-              onChange={this.inputHandler.bind(this, "date")}
+              onChange={this.inputHandler.bind(this, 'ending')}
               className="form-control"
               id="appt-date"
               required
@@ -77,8 +66,8 @@ class CreateEvent extends Component {
           </div>
           <div className="form-check" />
 
-          <button onClick={this.updateEvent} className="btn btn-primary">
-            {id ? "Save event" : "Add event"}
+          <button onClick={this.postEvent} className="btn btn-primary">
+            {id ? 'Save event' : 'Add event'}
           </button>
         </div>
         <button onClick={() => this.props.cancel()}>Cancel</button>
