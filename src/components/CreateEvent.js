@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import "./CreateEvent.css";
 import eventService from "../services/eventService";
-
+import rehiveService from "../services/rehiveService";
 const defaultNewEvent = {
   title: "",
   description: "",
@@ -16,12 +16,26 @@ class CreateEvent extends Component {
       event: Object.assign({}, defaultNewEvent)
     };
     this.postEvent = this.postEvent.bind(this);
+    this.getTransactions = this.getTransactions.bind(this);
+  }
+
+  componentDidMount() {
+    this.getTransactions();
+  }
+
+  getTransactions() {
+    rehiveService
+      .getAll()
+      .then(resp => {
+        console.log(resp.data);
+      })
+      .catch(console.error);
   }
 
   postEvent() {
     const { event } = this.state;
 
-    eventService.postEvent(event);
+    eventService.addEvent(event);
   }
 
   inputHandler(property, e) {
@@ -29,6 +43,8 @@ class CreateEvent extends Component {
     event[property] = e.target.value;
     this.setState({ event });
   }
+
+  //https://api.rehive.com/3/user/transactions/ -X GET -H "Authorization: Token 986e3994586c53dbc1c54db0517dca3da528afdfeab289a7f40f835694935e1curl https://api.rehive.com/3/user/transactions/ -X GET -H "Authorization: Token 986e3994586c53dbc1c54db0517dca3da528afdfeab289a7f40f835694935e1a" -H "Content-Type: application/json"
 
   render() {
     console.log("rendered");
@@ -77,7 +93,7 @@ class CreateEvent extends Component {
           </div>
           <div className="form-check" />
 
-          <button onClick={this.updateEvent} className="btn btn-primary">
+          <button onClick={this.postEvent} className="btn btn-primary">
             {id ? "Save event" : "Add event"}
           </button>
         </div>
@@ -88,3 +104,9 @@ class CreateEvent extends Component {
 }
 
 export default CreateEvent;
+
+//curl https://api.rehive.com/3/admin/transactions/
+//-X GET -H
+//"Authorization: Token
+//986e3994586c53dbc1c54db0517dca3da528afdfeab289a7f40f835694935e1a" -H
+//"Content-Type: application/json"
