@@ -1,5 +1,4 @@
 import React, { Component } from "react";
-import "./Main.css";
 import eventService from "../services/eventService";
 import Login from "./Login";
 import CreateEvent from "./CreateEvent";

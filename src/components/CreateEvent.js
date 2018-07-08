@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import './CreateEvent.css';
 import eventService from '../services/eventService';
 
 const defaultNewEvent = {
@@ -30,7 +29,7 @@ class CreateEvent extends Component {
   }
 
   render() {
-    const { id, title, description, address, ending } = this.state.event;
+    const { id, title, description, ending } = this.state.event;
     return (
       <div className="createevent">
         <div className="addform">
