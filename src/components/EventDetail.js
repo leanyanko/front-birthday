@@ -56,7 +56,7 @@ class EventDetail extends Component {
 
   submitPayment() {
     const { event } = this.props;
-    event.totalGiven = event.totalGiven + this.state.totalGiven;
+    event.totalGiven = parseInt(event.totalGiven, 10) + parseInt(this.state.totalGiven, 10);
     this.props.submitPayment(event);
   }
 
