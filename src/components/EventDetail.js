@@ -8,6 +8,7 @@ import Button from "@material-ui/core/Button";
 import eventService from "../services/eventService";
 import "./EventDetail.css";
 import rehiveService from "../services/rehiveService";
+import userService from "../services/userService";
 
 const styles = theme => ({
   root: {
@@ -45,9 +46,16 @@ class EventDetail extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      totalGiven: 15
+      totalGiven: 15,
+      recipient: null
     };
     this.submitPayment = this.submitPayment.bind(this);
+    this.fund = this.fund.bind(this);
+    this.getRecipient = this.getRecipient.bind(this);
+  }
+
+  componentDidMount() {
+    this.getRecipient();
   }
 
   handleChange = name => event => {
@@ -56,11 +64,36 @@ class EventDetail extends Component {
     });
   };
 
+  getRecipient() {
+    const userId = 0;
+    userService.getByID(userId).then(resp => {
+      console.log(resp.data);
+    });
+  }
+
+  fund() {
+    const fund = {
+      amount: this.state.totalGiven,
+      recipient: this.state.recipient
+        ? this.state.recipient
+        : "mskozlovskaya@gmail.com",
+      currency: "USD"
+    };
+
+    rehiveService
+      .fund(fund)
+      .then(resp => {
+        console.log(resp.data);
+      })
+      .catch(console.error);
+  }
+
   submitPayment() {
     const { event } = this.props;
     event.totalGiven =
       parseInt(event.totalGiven, 10) + parseInt(this.state.totalGiven, 10);
     this.props.submitPayment(event);
+    this.fund();
   }
 
   render() {
