@@ -12,10 +12,10 @@ class AllEvents extends Component {
       <div>
         There are events:
         {this.props.events
-          ? this.props.events.map((event, key) => {
-              return <Event event={event} key={key} />;
-            })
-          : ""}
+        ? this.props.events.map((event, key) => {
+            return <Event event={event} key={key} submitPayment={this.props.submitPayment} />;
+        })
+        : ""}
       </div>
     );
   }
