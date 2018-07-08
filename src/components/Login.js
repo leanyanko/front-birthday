@@ -56,7 +56,7 @@ class Register extends Component {
       .login(user)
       .then(resp => {
         console.log(resp.data.data);
-        this.setState({ currentUser: resp.data.data.data.user });
+        this.setState({ currentUser: resp.data.data.user });
         this.props.isValidUser();
       })
       .catch(console.error);
