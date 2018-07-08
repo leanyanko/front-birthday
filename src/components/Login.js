@@ -125,15 +125,6 @@ class Login extends Component {
           </Grid>
           <Grid container className={classes.root} justify={'center'}>
             <TextField
-              id="required"
-              value={company}
-              onChange={this.inputHandler.bind(this, 'company')}
-              className={classes.textField}
-              placeholder="Company"
-            />
-          </Grid>
-          <Grid container className={classes.root} justify={'center'}>
-            <TextField
               id="password"
               value={password1}
               onChange={this.inputHandler.bind(this, 'password1')}

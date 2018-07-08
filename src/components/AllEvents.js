@@ -2,8 +2,8 @@ import React, { Component } from 'react';
 import EventDetail from './EventDetail';
 
 class AllEvents extends Component {
-  constructor() {
-    super();
+  constructor(props) {
+    super(props);
     this.state = {};
   }
 
@@ -11,7 +11,7 @@ class AllEvents extends Component {
     return (
       <div>
         {this.props.events.map((event, key) => {
-          return <EventDetail event={event} key={key} />;
+          return <EventDetail event={event} key={key} submitPayment={this.props.submitPayment}/>;
         })}
       </div>
     );

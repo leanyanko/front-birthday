@@ -14,6 +14,7 @@ class Main extends Component {
     this.getEvents = this.getEvents.bind(this);
     this.createClickHandler = this.createClickHandler.bind(this);
     this.cancelCreate = this.cancelCreate.bind(this);
+    this.submitPayment = this.submitPayment.bind(this);
   }
 
   componentDidMount() {
@@ -38,6 +39,30 @@ class Main extends Component {
     this.setState({ create: false });
   }
 
+  submitPayment(event) {
+    console.log(event);
+    eventService
+      .updateEvent(event)
+      .then(resp => {
+        console.log('response--->', resp.data);
+        const events = this.state.events;
+        const updateEvent = events.map(event => {
+          if (event.id === resp.data.id) {
+            event.totalGiven = resp.data.totalGiven;
+          }
+
+          console.log('event --->', event);
+          return event;
+        });
+        this.setState({
+          events: updateEvent,
+        });
+      })
+      .catch(err => {
+        console.log(err);
+      });
+  }
+
   render() {
     const {
       viewProfile,
@@ -49,7 +74,14 @@ class Main extends Component {
       <div className="main">
         <Login />
         {createBirthday ? <CreateEvent cancel={this.cancelCreate} /> : ''}
-        {viewBirthdays ? <AllEvents events={this.state.events} /> : ''}
+        {viewBirthdays ? (
+          <AllEvents
+            events={this.state.events}
+            submitPayment={this.submitPayment}
+          />
+        ) : (
+          ''
+        )}
       </div>
     );
   }

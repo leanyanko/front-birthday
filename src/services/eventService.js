@@ -12,4 +12,8 @@ eventService.addEvent = event => {
   return axios.post(baseUrl, event);
 };
 
+eventService.updateEvent = event => {
+  return axios.patch(`http://localhost:8080/api/birthdays/${event.id}`, event)
+}
+
 export default eventService;
