@@ -1,11 +1,11 @@
-import React, { Component } from 'react';
-import rehiveService from '../services/rehiveService';
-import { withStyles } from '@material-ui/core/styles';
-import TextField from '@material-ui/core/TextField';
-import Grid from '@material-ui/core/Grid';
-import Button from '@material-ui/core/Button';
-import Paper from '@material-ui/core/Paper';
-import Typography from '@material-ui/core/Typography';
+import React, { Component } from "react";
+import { withStyles } from "@material-ui/core/styles";
+import TextField from "@material-ui/core/TextField";
+import Grid from "@material-ui/core/Grid";
+import Button from "@material-ui/core/Button";
+import Paper from "@material-ui/core/Paper";
+import Typography from "@material-ui/core/Typography";
+import rehiveService from "../services/rehiveService";
 
 const styles = theme => ({
   root: {
@@ -82,7 +82,7 @@ class Register extends Component {
               Welcome back!
             </Typography>
           </Grid>
-          <Grid container className={classes.root} justify={'center'}>
+          <Grid container className={classes.root} justify={"center"}>
             <TextField
               id="required"
               value={email}
@@ -95,16 +95,16 @@ class Register extends Component {
             <TextField
               id="password"
               value={password}
-              onChange={this.inputHandler.bind(this, 'password')}
+              onChange={this.inputHandler.bind(this, "password")}
               className={classes.textField}
               placeholder="Password"
             />
           </Grid>
-          <Grid container className={classes.root} justify={'center'}>
+          <Grid container className={classes.root} justify={"center"}>
             <Button
               onClick={this.login}
               variant="contained"
-              justify={'flex-end'}
+              justify={"flex-end"}
             >
               Log In!
             </Button>
