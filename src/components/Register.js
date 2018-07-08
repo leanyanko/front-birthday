@@ -4,7 +4,6 @@ import { withStyles } from '@material-ui/core/styles';
 import TextField from '@material-ui/core/TextField';
 import Grid from '@material-ui/core/Grid';
 import Button from '@material-ui/core/Button';
-import Paper from '@material-ui/core/Paper';
 import Typography from '@material-ui/core/Typography';
 
 const styles = theme => ({
@@ -36,6 +35,7 @@ class Register extends Component {
     this.state = {
       login: true,
       user: Object.assign({}, defaultNewUser),
+      isValidUser: false,
     };
     this.login = this.login.bind(this);
     this.checkHandle = this.checkHandle.bind(this);
@@ -53,7 +53,10 @@ class Register extends Component {
       .register(user)
       .then(resp => {
         console.log(resp);
-        this.setState({ currentUser: resp.data.data.data.user });
+        this.setState({
+          currentUser: resp.data.data.data.user,
+          isValidUser: true,
+        });
       })
       .catch(console.error);
   }
@@ -74,7 +77,7 @@ class Register extends Component {
       .login(user)
       .then(resp => {
         console.log(resp.data.data);
-        //this.setState({ currentUser: resp.data.data.data.user });
+        this.setState({ currentUser: resp.data.data.data.user });
       })
       .catch(console.error);
   }
@@ -100,8 +103,26 @@ class Register extends Component {
         <Grid item xs={12}>
           <Grid container justify={'center'}>
             <Typography variant="headline" component="h3">
-              Welcome back!
+              Welcome to Cake Day!
             </Typography>
+          </Grid>
+          <Grid container className={classes.root} justify={'center'}>
+            <TextField
+              id="required"
+              value={first_name}
+              onChange={this.inputHandler.bind(this, 'first_name')}
+              className={classes.textField}
+              placeholder="First Name"
+            />
+          </Grid>
+          <Grid container className={classes.root} justify={'center'}>
+            <TextField
+              id="required"
+              value={last_name}
+              onChange={this.inputHandler.bind(this, 'last_name')}
+              className={classes.textField}
+              placeholder="Last Name"
+            />
           </Grid>
           <Grid container className={classes.root} justify={'center'}>
             <TextField
@@ -122,12 +143,21 @@ class Register extends Component {
             />
           </Grid>
           <Grid container className={classes.root} justify={'center'}>
+            <TextField
+              id="password2"
+              value={password2}
+              onChange={this.inputHandler.bind(this, 'password2')}
+              className={classes.textField}
+              placeholder="Repeat Password"
+            />
+          </Grid>
+          <Grid container className={classes.root} justify={'center'}>
             <Button
               onClick={this.register}
               variant="contained"
               justify={'flex-end'}
             >
-              Log In!
+              Register!
             </Button>
           </Grid>
         </Grid>

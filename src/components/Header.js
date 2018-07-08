@@ -1,55 +1,64 @@
-import React from "react";
-import { withStyles } from "@material-ui/core/styles";
-import AppBar from "@material-ui/core/AppBar";
-import Toolbar from "@material-ui/core/Toolbar";
-import Typography from "@material-ui/core/Typography";
-import Button from "@material-ui/core/Button";
-import IconButton from "@material-ui/core/IconButton";
-import MenuIcon from "@material-ui/icons/Menu";
-import List from "@material-ui/core/List";
-import ListItem from "@material-ui/core/ListItem";
-import ListItemIcon from "@material-ui/core/ListItemIcon";
-import ListItemText from "@material-ui/core/ListItemText";
-import Drawer from "@material-ui/core/Drawer";
-import Divider from "@material-ui/core/Divider";
-import RowingIcon from "@material-ui/icons/Rowing";
-import MotorcycleIcon from "@material-ui/icons/Motorcycle";
-import EditIcon from "@material-ui/icons/Edit";
-import CreateIcon from "@material-ui/icons/CreateNewFolder";
-import Login from "./Login";
+import React from 'react';
+import { withStyles } from '@material-ui/core/styles';
+import AppBar from '@material-ui/core/AppBar';
+import Toolbar from '@material-ui/core/Toolbar';
+import Typography from '@material-ui/core/Typography';
+import Button from '@material-ui/core/Button';
+import IconButton from '@material-ui/core/IconButton';
+import MenuIcon from '@material-ui/icons/Menu';
+import List from '@material-ui/core/List';
+import ListItem from '@material-ui/core/ListItem';
+import ListItemIcon from '@material-ui/core/ListItemIcon';
+import ListItemText from '@material-ui/core/ListItemText';
+import Drawer from '@material-ui/core/Drawer';
+import Divider from '@material-ui/core/Divider';
+import RowingIcon from '@material-ui/icons/Rowing';
+import MotorcycleIcon from '@material-ui/icons/Motorcycle';
+import EditIcon from '@material-ui/icons/Edit';
+import CreateIcon from '@material-ui/icons/CreateNewFolder';
+import Login from './Login';
 
 const styles = {
   root: {
-    flexGrow: 1
+    flexGrow: 1,
   },
   flex: {
-    flex: 1
+    flex: 1,
   },
   menuButton: {
     marginLeft: -12,
-    marginRight: 20
+    marginRight: 20,
   },
   list: {
-    width: 250
+    width: 250,
   },
   fullList: {
-    width: "auto"
-  }
+    width: 'auto',
+  },
 };
 
 class Header extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      showDrawer: false
+      showDrawer: false,
+      login: false,
     };
     this.toggleDrawer = this.toggleDrawer.bind(this);
+    this.loginChange = this.loginChange.bind(this);
   }
 
   toggleDrawer() {
     this.setState({
-      showDrawer: !this.state.showDrawer
+      showDrawer: !this.state.showDrawer,
     });
+  }
+
+  loginChange() {
+    this.setState({
+      login: !this.state.login,
+    });
+    this.props.loginChange();
   }
 
   render() {
@@ -58,7 +67,7 @@ class Header extends React.Component {
       viewProfile,
       viewBirthdays,
       editProfile,
-      createBirthday
+      createBirthday,
     } = this.props;
 
     const sideList = (
@@ -123,7 +132,9 @@ class Header extends React.Component {
             >
               CAKE DAY
             </Typography>
-            <Button color="inherit">Login</Button>
+            <Button color="inherit" onClick={this.loginChange}>
+              {this.state.login ? 'Register' : 'Login'}
+            </Button>
           </Toolbar>
         </AppBar>
       </div>
