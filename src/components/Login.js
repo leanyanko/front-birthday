@@ -54,7 +54,7 @@ class Login extends Component {
     rehiveService
       .login(user)
       .then(resp => {
-        console.log(resp.data.data.user);
+        console.log(resp.data.data);
         //this.setState({ currentUser: resp.data.data.data.user });
       })
       .catch(console.error);
