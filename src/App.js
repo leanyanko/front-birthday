@@ -2,8 +2,8 @@ import React, { Component } from 'react';
 import Header from './components/Header';
 import Main from './components/Main';
 import StellarSdk from 'stellar-sdk';
-
-import './App.css';
+import MuiPickersUtilsProvider from 'material-ui-pickers/utils/MuiPickersUtilsProvider';
+import DateFnsUtils from 'material-ui-pickers/utils/date-fns-utils';
 
 class App extends Component {
   constructor(props) {
@@ -53,7 +53,7 @@ class App extends Component {
       createBirthday,
     } = this.state;
     return (
-      <div className="App">
+      <MuiPickersUtilsProvider utils={DateFnsUtils}>
         <Header
           viewProfile={this.viewProfile}
           viewBirthdays={this.viewBirthdays}
@@ -66,7 +66,7 @@ class App extends Component {
           editProfile={editProfile}
           createBirthday={createBirthday}
         />
-      </div>
+      </MuiPickersUtilsProvider>
     );
   }
 }

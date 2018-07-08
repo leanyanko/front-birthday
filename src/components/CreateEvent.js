@@ -1,24 +1,48 @@
 import React, { Component } from 'react';
 import eventService from '../services/eventService';
+import { withStyles } from '@material-ui/core/styles';
+import TextField from '@material-ui/core/TextField';
+import Grid from '@material-ui/core/Grid';
+import Button from '@material-ui/core/Button';
+import DateFnsUtils from 'material-ui-pickers/utils/date-fns-utils';
+import MuiPickersUtilsProvider from 'material-ui-pickers/utils/MuiPickersUtilsProvider';
+import TimePicker from 'material-ui-pickers/TimePicker';
+import DatePicker from 'material-ui-pickers/DatePicker';
+import DateTimePicker from 'material-ui-pickers/DateTimePicker';
 
 const defaultNewEvent = {
   title: '',
   description: '',
-  ending: '22-07-2018',
+  ending: new Date(),
 };
+
+const styles = theme => ({
+  root: {
+    overflow: 'hidden',
+  },
+  container: {
+    display: 'flex',
+    flexWrap: 'wrap',
+  },
+  textField: {
+    width: 200,
+  },
+});
 
 class CreateEvent extends Component {
   constructor(props) {
     super(props);
+
     this.state = {
       event: Object.assign({}, defaultNewEvent),
+      date: props.ending,
     };
     this.postEvent = this.postEvent.bind(this);
   }
 
   postEvent() {
     const { event } = this.state;
-    console.log(event);
+    event.ending = this.state.date;
     eventService.addEvent(event);
   }
 
@@ -28,51 +52,56 @@ class CreateEvent extends Component {
     this.setState({ event });
   }
 
+  handleDateChange = date => {
+    this.setState({ date: date });
+  };
+
   render() {
     const { id, title, description, ending } = this.state.event;
+    const { date } = this.state;
+    const { classes } = this.props;
+
     return (
-      <div className="createevent">
-        <div className="addform">
-          <div className="form-group">
-            <input
-              type="text"
+      <Grid>
+        <Grid item xs={12}>
+          <Grid container className={classes.root} justify={'center'}>
+            <TextField
+              id="required"
               value={title}
               onChange={this.inputHandler.bind(this, 'title')}
-              className="form-control"
-              aria-describedby="emailHelp"
+              className={classes.textField}
               placeholder="Title"
             />
-          </div>
-
-          <input
-            type="text"
-            value={description}
-            onChange={this.inputHandler.bind(this, 'description')}
-            className="form-control"
-            aria-describedby="emailHelp"
-            placeholder="Description"
-          />
-
-          <div className="form-group">
-            <input
-              value={ending}
-              type="date"
-              onChange={this.inputHandler.bind(this, 'ending')}
-              className="form-control"
-              id="appt-date"
-              required
+          </Grid>
+          <Grid container className={classes.root} justify={'center'}>
+            <TextField
+              id="required"
+              value={description}
+              onChange={this.inputHandler.bind(this, 'description')}
+              className={classes.textField}
+              placeholder="Description"
             />
-          </div>
-          <div className="form-check" />
-
-          <button onClick={this.postEvent} className="btn btn-primary">
-            {id ? 'Save event' : 'Add event'}
-          </button>
-        </div>
-        <button onClick={() => this.props.cancel()}>Cancel</button>
-      </div>
+          </Grid>
+          <Grid container className={classes.root} justify={'center'}>
+            <DatePicker
+              value={ending}
+              minDate={date}
+              onChange={this.handleDateChange}
+            />
+          </Grid>
+          <Grid container className={classes.root} justify={'center'}>
+            <Button
+              color="secondary"
+              onClick={this.postEvent}
+              justify={'flex-end'}
+            >
+              Create Birthday!
+            </Button>
+          </Grid>
+        </Grid>
+      </Grid>
     );
   }
 }
 
-export default CreateEvent;
+export default withStyles(styles)(CreateEvent);
