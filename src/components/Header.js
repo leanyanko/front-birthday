@@ -49,21 +49,27 @@ class Header extends React.Component {
     this.setState({
       showDrawer: !this.state.showDrawer,
     });
-  };
+  }
 
   render() {
-    const { classes } = this.props;
+    const {
+      classes,
+      viewProfile,
+      viewBirthdays,
+      editProfile,
+      createBirthday,
+    } = this.props;
 
     const sideList = (
       <div className={classes.list}>
         <List component="nav">
-          <ListItem button>
+          <ListItem button onClick={viewProfile}>
             <ListItemIcon>
               <RowingIcon />
             </ListItemIcon>
             <ListItemText primary="Profile" />
           </ListItem>
-          <ListItem button>
+          <ListItem button onClick={viewBirthdays}>
             <ListItemIcon>
               <MotorcycleIcon />
             </ListItemIcon>
@@ -72,13 +78,13 @@ class Header extends React.Component {
         </List>
         <Divider />
         <List component="nav">
-          <ListItem button>
+          <ListItem button onClick={editProfile}>
             <ListItemIcon>
               <EditIcon />
             </ListItemIcon>
             <ListItemText primary="Edit Profile" />
           </ListItem>
-          <ListItem button>
+          <ListItem button onClick={createBirthday}>
             <ListItemIcon>
               <CreateIcon />
             </ListItemIcon>
@@ -99,10 +105,7 @@ class Header extends React.Component {
             >
               <MenuIcon onClick={this.toggleDrawer} />
             </IconButton>
-            <Drawer
-              open={this.state.showDrawer}
-              onClose={this.toggleDrawer}
-            >
+            <Drawer open={this.state.showDrawer} onClose={this.toggleDrawer}>
               <div
                 tabIndex={0}
                 role="button"
@@ -117,7 +120,7 @@ class Header extends React.Component {
               color="inherit"
               className={classes.flex}
             >
-              Title
+              BIRTHDAYS
             </Typography>
             <Button color="inherit">Login</Button>
           </Toolbar>
