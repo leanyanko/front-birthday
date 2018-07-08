@@ -1,7 +1,7 @@
-import axios from "axios";
+import axios from 'axios';
 
 const userService = {};
-const baseUrl = "http://localhost:8080/api/userss";
+const baseUrl = 'http://localhost:8080/api/users';
 userService.getAll = () => {
   return axios.get(baseUrl);
 };

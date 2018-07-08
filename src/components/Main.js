@@ -1,15 +1,14 @@
-import React, { Component } from "react";
-import "./Main.css";
-import eventService from "../services/eventService";
-import Login from "./Login";
-import CreateEvent from "./CreateEvent";
+import React, { Component } from 'react';
+import eventService from '../services/eventService';
+import Login from './Login';
+import CreateEvent from './CreateEvent';
 
 class Main extends Component {
   constructor() {
     super();
     this.state = {
       events: null,
-      create: false
+      create: false,
     };
     this.getEvents = this.getEvents.bind(this);
     this.createClickHandler = this.createClickHandler.bind(this);
@@ -39,14 +38,16 @@ class Main extends Component {
   }
 
   render() {
+    const {
+      viewProfile,
+      viewBirthdays,
+      editProfile,
+      createBirthday,
+    } = this.props;
     return (
       <div className="main">
-        Main
         <Login />
-        <button onClick={() => this.createClickHandler()}>
-          I want to start my birthday funding!
-        </button>
-        {this.state.create ? <CreateEvent cancel={this.cancelCreate} /> : ""}
+        {createBirthday ? <CreateEvent cancel={this.cancelCreate} /> : ''}
       </div>
     );
   }
