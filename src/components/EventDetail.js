@@ -72,7 +72,7 @@ class EventDetail extends Component {
           <Typography component="p">{event.description}</Typography>
           <Typography component="p">{event.creator.firstName}</Typography>
           <Typography component="p">
-            Total amount donated: {event.totalGiven}
+            Total amount donated: ${event.totalGiven}
           </Typography>
           <TextField
             className={classes.formControl}
