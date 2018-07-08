@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import eventService from '../services/eventService';
 import Login from './Login';
 import CreateEvent from './CreateEvent';
+import AllEvents from './AllEvents';
 
 class Main extends Component {
   constructor() {
@@ -48,6 +49,7 @@ class Main extends Component {
       <div className="main">
         <Login />
         {createBirthday ? <CreateEvent cancel={this.cancelCreate} /> : ''}
+        {viewBirthdays ? <AllEvents events={this.state.events} /> : ''}
       </div>
     );
   }
