@@ -29,7 +29,14 @@ rehiveService.register = user => {
 
 rehiveService.login = user => {
   const url = "https://api.rehive.com/3/auth/login/";
-  return axios.post(url, user);
+  return axios.post(url, user).then(resp => {
+    console.log(resp);
+  });
+};
+
+rehiveService.fund = funding => {
+  const url = "https://api.rehive.com/3/transactions/transfer/";
+  return axios.post(url, funding);
 };
 
 export default rehiveService;

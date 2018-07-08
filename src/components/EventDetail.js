@@ -1,22 +1,24 @@
-import React, { Component } from 'react';
-import { withStyles } from '@material-ui/core/styles';
-import Paper from '@material-ui/core/Paper';
-import Typography from '@material-ui/core/Typography';
-import NumberFormat from 'react-number-format';
-import TextField from '@material-ui/core/TextField';
-import Button from '@material-ui/core/Button';
-import eventService from '../services/eventService';
+import React, { Component } from "react";
+import { withStyles } from "@material-ui/core/styles";
+import Paper from "@material-ui/core/Paper";
+import Typography from "@material-ui/core/Typography";
+import NumberFormat from "react-number-format";
+import TextField from "@material-ui/core/TextField";
+import Button from "@material-ui/core/Button";
+import eventService from "../services/eventService";
+import "./EventDetail.css";
+import rehiveService from "../services/rehiveService";
 
 const styles = theme => ({
   root: {
     ...theme.mixins.gutters(),
     paddingTop: theme.spacing.unit * 2,
-    paddingBottom: theme.spacing.unit * 2,
+    paddingBottom: theme.spacing.unit * 2
   },
   container: {
-    display: 'flex',
-    flexWrap: 'wrap',
-  },
+    display: "flex",
+    flexWrap: "wrap"
+  }
 });
 
 function NumberFormatCustom(props) {
@@ -29,8 +31,8 @@ function NumberFormatCustom(props) {
       onValueChange={values => {
         onChange({
           target: {
-            value: values.value,
-          },
+            value: values.value
+          }
         });
       }}
       thousandSeparator
@@ -43,20 +45,21 @@ class EventDetail extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      totalGiven: 15,
+      totalGiven: 15
     };
     this.submitPayment = this.submitPayment.bind(this);
   }
 
   handleChange = name => event => {
     this.setState({
-      [name]: event.target.value,
+      [name]: event.target.value
     });
   };
 
   submitPayment() {
     const { event } = this.props;
-    event.totalGiven = parseInt(event.totalGiven, 10) + parseInt(this.state.totalGiven, 10);
+    event.totalGiven =
+      parseInt(event.totalGiven, 10) + parseInt(this.state.totalGiven, 10);
     this.props.submitPayment(event);
   }
 
@@ -64,13 +67,16 @@ class EventDetail extends Component {
     const { classes, event } = this.props;
     const { totalGiven } = this.state;
     return (
-      <div>
+      <div className="event">
+        {/* <button onClick={() => close()}>Close</button> */}
         <Paper className={classes.root} elevation={1}>
           <Typography variant="headline" component="h3">
             {event.title}
           </Typography>
           <Typography component="p">{event.description}</Typography>
-          <Typography component="p">{event.creator.firstName}</Typography>
+          <Typography component="p">
+            {event.creator ? event.creator.firstName : ""}
+          </Typography>
           <Typography component="p">
             Total amount donated: ${event.totalGiven}
           </Typography>
@@ -78,10 +84,10 @@ class EventDetail extends Component {
             className={classes.formControl}
             label="react-number-format"
             value={totalGiven}
-            onChange={this.handleChange('totalGiven')}
+            onChange={this.handleChange("totalGiven")}
             id="formatted-numberformat-input"
             InputProps={{
-              inputComponent: NumberFormatCustom,
+              inputComponent: NumberFormatCustom
             }}
           />
           <Button
