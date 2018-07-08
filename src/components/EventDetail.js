@@ -58,7 +58,7 @@ class EventDetail extends Component {
 
   submitPayment() {
     const { event } = this.props;
-    event.totalGiven = event.totalGiven + this.state.totalGiven;
+    event.totalGiven = parseInt(event.totalGiven, 10) + parseInt(this.state.totalGiven, 10);
     this.props.submitPayment(event);
   }
 
@@ -75,7 +75,7 @@ class EventDetail extends Component {
           <Typography component="p">{event.description}</Typography>
           <Typography component="p">{event.creator.firstName}</Typography>
           <Typography component="p">
-            Total amount donated: {event.totalGiven}
+            Total amount donated: ${event.totalGiven}
           </Typography>
           <TextField
             className={classes.formControl}
