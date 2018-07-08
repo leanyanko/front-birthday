@@ -2,8 +2,7 @@ import React, { Component } from "react";
 import { withStyles } from "@material-ui/core/styles";
 import Paper from "@material-ui/core/Paper";
 import Typography from "@material-ui/core/Typography";
-import "./EventDetail.css";
-import rehiveService from "../services/rehiveService";
+import EventDetail from "./EventDetail";
 
 const styles = theme => ({
   root: {
@@ -13,37 +12,32 @@ const styles = theme => ({
   }
 });
 
-class EventDetail extends Component {
+class Event extends Component {
   constructor() {
     super();
-    this.state = {};
-    this.getDetails = this.getDetails.bind(this);
-    this.fund = this.fund.bind(this);
-  }
-
-  componentDidMount() {
-    this.getDetails();
-  }
-
-  getDetails() {}
-  fund() {
-    const fund = {
-      amount: 500,
-      recipient: "mskozlovskaya@gmail.com",
-      currency: "USD"
+    this.state = {
+      details: false
     };
-    rehiveService
-      .fund(fund)
-      .then(resp => {})
-      .catch(console.error);
+
+    this.closeDetail = this.closeDetail.bind(this);
+    this.showDetails = this.showDetails.bind(this);
+  }
+
+  closeDetail() {
+    this.setState({ details: false });
+  }
+
+  showDetails() {
+    this.setState({ details: true });
   }
 
   render() {
-    const { classes, event, close } = this.props;
+    const { classes, event } = this.props;
+    const { details } = this.state;
+    console.log("detail? ", details);
     console.log(event);
     return (
-      <div className="event">
-        <button onClick={() => close()}>Close</button>
+      <div>
         <Paper className={classes.root} elevation={1}>
           <Typography variant="headline" component="h3">
             {event.title}
@@ -55,11 +49,16 @@ class EventDetail extends Component {
           <Typography component="p">
             Total amount donated: {event.totalGiven}
           </Typography>
-          <button onClick={() => this.fund()}>I want to fund!</button>
+          <button onClick={this.showDetails}>Details</button>
+          {details ? (
+            <EventDetail event={event} close={this.closeDetail} />
+          ) : (
+            ""
+          )}
         </Paper>
       </div>
     );
   }
 }
 
-export default withStyles(styles)(EventDetail);
+export default withStyles(styles)(Event);

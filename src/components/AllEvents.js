@@ -1,18 +1,21 @@
-import React, { Component } from 'react';
-import EventDetail from './EventDetail';
+import React, { Component } from "react";
+import Event from "./Event";
 
 class AllEvents extends Component {
-  constructor() {
-    super();
+  constructor(props) {
+    super(props);
     this.state = {};
   }
 
   render() {
     return (
       <div>
-        {this.props.events.map((event, key) => {
-          return <EventDetail event={event} key={key} />;
-        })}
+        There are events:
+        {this.props.events
+          ? this.props.events.map((event, key) => {
+              return <Event event={event} key={key} />;
+            })
+          : ""}
       </div>
     );
   }
