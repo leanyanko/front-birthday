@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import eventService from '../services/eventService';
+import Register from './Register';
 import Login from './Login';
 import CreateEvent from './CreateEvent';
 import AllEvents from './AllEvents';
@@ -69,10 +70,11 @@ class Main extends Component {
       viewBirthdays,
       editProfile,
       createBirthday,
+      loginChange,
     } = this.props;
     return (
       <div className="main">
-        <Login />
+        {loginChange ? <Login isValidUser={this.isValidUser}/> : <Register isValidUser={this.isValidUser}/>}
         {createBirthday ? <CreateEvent cancel={this.cancelCreate} /> : ''}
         {viewBirthdays ? (
           <AllEvents

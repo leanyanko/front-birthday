@@ -13,12 +13,15 @@ class App extends Component {
       viewBirthdays: false,
       editProfile: false,
       createBirthday: false,
+      loginChange: false,
+      showLogin: true,
     };
 
     this.viewProfile = this.viewProfile.bind(this);
     this.viewBirthdays = this.viewBirthdays.bind(this);
     this.editProfile = this.editProfile.bind(this);
     this.createBirthday = this.createBirthday.bind(this);
+    this.loginChange = this.loginChange.bind(this);
   }
 
   viewProfile() {
@@ -45,12 +48,19 @@ class App extends Component {
     });
   }
 
+  loginChange() {
+    this.setState({
+      loginChange: !this.state.loginChange,
+    });
+  }
+
   render() {
     const {
       viewProfile,
       viewBirthdays,
       editProfile,
       createBirthday,
+      loginChange,
     } = this.state;
     return (
       <MuiPickersUtilsProvider utils={DateFnsUtils}>
@@ -59,12 +69,14 @@ class App extends Component {
           viewBirthdays={this.viewBirthdays}
           editProfile={this.editProfile}
           createBirthday={this.createBirthday}
+          loginChange={this.loginChange}
         />
         <Main
           viewProfile={viewProfile}
           viewBirthdays={viewBirthdays}
           editProfile={editProfile}
           createBirthday={createBirthday}
+          loginChange={loginChange}
         />
       </MuiPickersUtilsProvider>
     );
