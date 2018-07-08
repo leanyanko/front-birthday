@@ -90,7 +90,7 @@ class CreateEvent extends Component {
           </Grid>
           <Grid container className={classes.root} justify={'center'}>
             <Button
-              color="secondary"
+              variant='contained'
               onClick={this.postEvent}
               justify={'flex-end'}
             >

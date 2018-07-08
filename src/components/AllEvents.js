@@ -10,7 +10,6 @@ class AllEvents extends Component {
   render() {
     return (
       <div>
-        There are events:
         {this.props.events
           ? this.props.events.map((event, key) => {
               return (

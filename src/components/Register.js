@@ -53,7 +53,7 @@ class Register extends Component {
       .then(resp => {
         console.log(resp);
         this.setState({
-          currentUser: resp.data.data.data.user,
+          currentUser: resp.data.data.user,
         });
         this.props.isValidUser();
       })

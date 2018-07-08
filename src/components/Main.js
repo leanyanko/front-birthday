@@ -11,11 +11,13 @@ class Main extends Component {
     this.state = {
       events: null,
       create: false,
+      isValidUser: false,
     };
     this.getEvents = this.getEvents.bind(this);
     this.createClickHandler = this.createClickHandler.bind(this);
     this.cancelCreate = this.cancelCreate.bind(this);
     this.submitPayment = this.submitPayment.bind(this);
+    this.isValidUser = this.isValidUser.bind(this);
   }
 
   componentDidMount() {
@@ -64,6 +66,12 @@ class Main extends Component {
       });
   }
 
+  isValidUser() {
+    this.setState({
+      isValidUser: true,
+    });
+  }
+
   render() {
     const {
       viewProfile,
@@ -74,7 +82,15 @@ class Main extends Component {
     } = this.props;
     return (
       <div className="main">
-        {loginChange ? <Login isValidUser={this.isValidUser}/> : <Register isValidUser={this.isValidUser}/>}
+        {!this.state.isValidUser ? (
+          loginChange ? (
+            <Login isValidUser={this.isValidUser} />
+          ) : (
+            <Register isValidUser={this.isValidUser} />
+          )
+        ) : (
+          ''
+        )}
         {createBirthday ? <CreateEvent cancel={this.cancelCreate} /> : ''}
         {viewBirthdays ? (
           <AllEvents
